@@ -1,0 +1,90 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    text-align: left;
+    margin: 50px;
+    font-size: 24px;
+    padding: 25px 500px 100px;
+    
+}
+
+header {
+    display: inline;
+
+}
+
+.head-right {
+    text-align: right;
+    text-decoration: none;
+    font-size: 18px;
+    color: rgba(0,0,0,0.5);
+    /* display: inline; */
+}
+
+.head-left {
+    text-align: left;
+    text-decoration: none;
+    font-size: 18px;
+    color: rgba(0,0,0,0.5);
+    /* display: inline; */
+}
+
+
+#start {
+    text-align: center;
+
+}
+
+.startBtn {
+    display: inline;
+}
+
+
+h1 {
+    font-size: 48px;
+    font-weight: bolder;
+}
+
+h2 {
+    font-size: 34px;
+    font-weight: lighter;
+}
+
+h3 {
+    font-size: 34px;
+    font-weight: lighter;
+    background: rgba(36, 36, 37, 0.2)
+    
+}
+
+label {
+    font-size: 34px;
+    font-weight: lighter;
+}
+
+
+.hide {
+    display: none;
+}
+
+
+button {
+    padding: 10px 24px;
+    margin: 24px 0px;
+    cursor: pointer;
+    font-size: 24px;
+    background-color: #001a4d;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); 
+    display: block;
+}
+
+.buttons {
+    display: inline;
+}
