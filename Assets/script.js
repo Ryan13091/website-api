@@ -1,11 +1,11 @@
 //Start Creating variables needed on page for index.html to pull from
 var page = document.getElementById('page-body')
 var pageContent = document.getElementById('page-content')
-var highScoresPage = document.getElementById('high-scores')
-var startQuizBtn = document.getElementById('starts-quiz')
+var highScoresTxtLink = document.getElementById('high-scores')
+var startTheQuizBtn = document.getElementById('starts-quiz')
 var timeDisplay = document.getElementById('timer')
 
-//Start - Creating Global Variable Needed in Console etc.
+//Start - Creating Global Variable Needed in Console etc. to call out later down the page
 var counter = 60;
 var scoreArray = loadNewScore() || [];
 var questIndex = 0;
@@ -39,3 +39,107 @@ var questArray = [
         correctAnswersIndex: 3
     }
 ];
+
+// Need Event Listeners to create clickable buttons that trigger a callback from Variables
+highScoresTxtLink.addEventListener('click', highScoresPage);
+startTheQuizBtn.addEventListener('click', startQuiz);
+
+//Define call back functions intentions
+function startQuiz() {
+    timer();
+
+    //call back function to create the questions
+    createQuestion(questArray[questIndex]);
+}
+
+//define what the timer function will do
+function timer() {
+    window.startCount = setInterval(function () {
+        counter--;
+        //counts down by 1 - now definie that it should count down to zero and display
+        counter > 0 ? (timerDisplay.innerText = counter) : (timeDisplay.innerText = 0);
+        if (counter === 0) {
+            clearInterval(startCount);
+            gameFinishWindow();
+        }
+    }, 1000);
+}
+
+//Create function for questions to display
+function createQuestion(questionObj) {
+    //clear for new question
+    pageContent.innerHTML = '';
+
+    //go to next question
+    questIndex++;
+
+    //create question elements on page-content container
+    var questContainerEl = document.createElement('div');
+    questContainerEl.className = 'question';
+    questContainerEl.id = 'question';
+
+    //push questions within container
+    var questEl = document.createElement('h2');
+    questEl.textContent = questionObj.question;
+    //add the question as a child with append function
+    questContainerEl.appendChild(questEl)
+    //show the available answers
+    var answersAvailEl = document.createElement('ul');
+    answersAvailEl.className = 'answer-avail-list';
+    answersAvailEl.id = 'answer-avail-list'
+
+    //pull the available answers list on front end
+    var answers = questionObj.answers;
+    //need for var - to store answers
+    for (var i = 0; i < answers.length; i++)
+        var answerEl = document.createElement('li')
+    answerEl.className = 'answer-avail-item'
+    // need to create a button to submit answer
+    answerEl.innerHTML = `<button class="btn answer-btn">${i + 1}. ${answers[i]}</button>`;
+    //let user know if answer was correct or not
+    if (i === questionObj.correctAnswersIndex) {
+        answerEl.setAttribute('answer-correct', 'true');
+    }
+    // place answer 
+    answerAvailListEl.appendChild(answerEl);
+}
+
+questContainerEl.appendChild(answerAvailListEl);
+pageContent.appendChild(questContainerEl);
+
+//add event listener for user when they click on Answer object
+answerAvailListEl.addEventListener('click', verifyAnswer);
+
+function verifyAnswer(event) {
+    var clicked = event.target.closest('li.answer-avail-item');
+    var answerList = document.getElementById('answer-avail-list');
+
+    //check for verified answer if it's right or wrong.
+    if (clicked) {
+        var isCorrectAnswer = clicked.hasAttribute('answer-correct');
+        //now tell user they were right
+        if (isCorrectAnswer) {
+            var rightMsgEl = document.createElement('p')
+            rightMsgEl.className = 'feedback-msg';
+            rightMsgEl.innerText = 'Right Answer!';
+            answerList.appendChild(rightMsgEl);
+            //or tell user they were wrong and deduct 10 seconds from 60
+        } else {
+            counter = counter - 10;
+            var wrongMsgEl = document.createElement('p')
+            wrongMsgEl.className = 'feedback-msg';
+            wrongMsgEl.innerText = 'Wrong Answer!';
+            answerList.appendChild(wrongMsgEl);
+        }
+        answerList.removeEventListener('click', verifyAnswer);
+
+        //now setup when feedback on correct/wrong answer displays and user proceeds.
+        setTimeout(function () {
+            if (counter <= 0 || questIndex >= questArray.length) {
+                endGamePage();
+            } else {
+                createQuestion(questArray[questIndex]);
+            }
+        }, 1000);
+    }
+}
