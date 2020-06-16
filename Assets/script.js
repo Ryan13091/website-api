@@ -14,8 +14,28 @@ var questArray = [
     {
         question: 'Here is a list of common data type, which one does not belong?',
         answers: ['strings', 'booleans', 'alerts', 'numbers'],
-        correctAnswerIndex: 2
+        correctAnswersIndex: 2
     },
 
-
-]
+    //question 2 start - repeated from above
+    {
+        question: 'Arrays in Javascript are used to store what?',
+        answers: ['numbers & strings', 'other arrays', 'booleans', 'all of the above'],
+        correctAnswersIndex: 3
+    },
+    {
+        question: 'The condition in an IF/ELSE is enclosed in what?',
+        answers: ['quotes" "', 'curly brackets {}', 'parenthesis ()', 'square brackets []'],
+        correctAnswersIndex: 2
+    },
+    {
+        question: 'String values must be enclosed within what?',
+        answers: ['commas', 'curly brackets', 'quotes', 'parenthesis'],
+        correctAnswersIndex: 2
+    },
+    {
+        question: 'A very useful tool used during development & debugging for printing content to the debugger console is?',
+        answers: ['JavaScript', 'terminal/bash', 'for loops', 'console.log'],
+        correctAnswersIndex: 3
+    }
+];
