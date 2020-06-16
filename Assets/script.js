@@ -143,3 +143,69 @@ function verifyAnswer(event) {
         }, 1000);
     }
 }
+
+//Need function to display final scores and also to clear/go back and stop the Startcount timer
+function endGamePage() {
+    clearInterval(window.startCount)
+
+    pageContent.innerHTML = '';
+    var endGameEl = document.createElement('div');
+    endGameEl.className = "end-game";
+    endGameEl.id = 'end-game';
+
+    var endGameMsgEl = document.createElement('h2');
+    endGameMsgEl.innerText = 'You finished!';
+    endGameEl.appendChild(endGameMsgEl);
+
+    var finScoreMsgEl = document.createElement('h3');
+    finScoreMsgEl.innerText = 'Check your final score: ';
+
+    var finScoreEl = document.createElement('span')
+    finScoreEl.id = 'final=score'
+
+    if (counter >= 0) {
+        finScoreEl.innerText = counter + '.';
+    } else {
+        finScoreEl.innerText = 0 + '.';
+    }
+
+    finScoreMsgEl.appendChild(finScoreEl);
+    endGameEl.appendChild(finScoreMsgEl);
+
+    var userStatsEl = document.createElement('form');
+    userStatsEl.innerHTML =
+        "<label for='initials'>Enter your Initials Here</label>" +
+        "<input type='text' id='initials' name='initials' maxlength=2>" +
+        "<button class='btn btn-short' type='submit'>Submit Score</button>";
+
+    // Add event listener for which adds in player initials and overall score
+    userStatsEl.addEventListener('submit', allStatsSubmit);
+
+    endGameEl.appendChild(userStatsEl);
+    pageContent.appendChild(endGameEl);
+}
+
+function allStatsSubmit(event) {
+    event.preventDefault();
+    var userInitials = document.querySelector("input[name='initials']")
+        .nodeValue.toUpperCase();
+    var userScore = counter > 0 ? counter : 0;
+    var userStatsObj = {
+        player: userInitials,
+        score: userScore
+    };
+    scoreArray.push(userStatsObj);
+    saveScores();
+
+    //high score page
+    topScoresPage()
+}
+
+//need fuction to call variable to show all top scores
+
+function topScoresPage() {
+    page.innerHTML = '';
+
+    varTopScoresContainerEl
+}
+
