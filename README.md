@@ -34,9 +34,8 @@ The following animation demonstrates the application functionality:
 
 You are required to submit the following for review:
 
-* The URL of the functional, deployed application.
+* The URL of the functional, deployed application: https://ryan13091.github.io/website-api/
 
-* The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
+* The URL of the GitHub repository: https://github.com/Ryan13091/website-api
 
-- - -
-© 2019 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.
+
